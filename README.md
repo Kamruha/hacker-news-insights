@@ -13,22 +13,22 @@ data collection → data processing → data analysis → data export.
 
 Features
 
-Scrapes multiple pages from Hacker News
-Extracts post title, link, author, time, score, and comments
-Handles missing data safely
-Converts text-based values into numeric format
-Sorts posts by number of comments
-Displays top-performing posts
-Exports results to a formatted Excel file
-Automatically adjusts column widths
-Applies basic styling for better readability
+* Scrapes multiple pages from Hacker News
+* Extracts post title, link, author, time, score, and comments
+* Handles missing data safely
+* Converts text-based values into numeric format
+* Sorts posts by number of comments
+* Displays top-performing posts
+* Exports results to a formatted Excel file
+* Automatically adjusts column widths
+* Applies basic styling for better readability
 
 Technologies Used
 
-Python
-requests (HTTP requests)
-BeautifulSoup (HTML parsing)
-openpyxl (Excel file generation)
+* Python
+* requests (HTTP requests)
+* BeautifulSoup (HTML parsing)
+* openpyxl (Excel file generation)
 
 How It Works
 
@@ -50,21 +50,21 @@ Output Example
 
 The generated Excel file contains:
 
-Title
-Link
-Author
-Time
-Score
-Comments
+* Title
+* Link
+* Author
+* Time
+* Score
+* Comments
 
 Posts are sorted by number of comments in descending order, making it easy to identify trending discussions.
 
 Use Cases
 
-Market and trend analysis
-Monitoring popular discussions in tech
-Data collection for further analytics
-Portfolio demonstration of scraping skills
+* Market and trend analysis
+* Monitoring popular discussions in tech
+* Data collection for further analytics
+* Portfolio demonstration of scraping skills
 
 Installation
 
@@ -82,17 +82,17 @@ hacker_news.xlsx
 
 Notes
 
-A delay between requests is used to avoid overloading the server
-The script is designed to handle missing or incomplete data gracefully
-The project focuses on clean structure and readability
+* A delay between requests is used to avoid overloading the server
+* The script is designed to handle missing or incomplete data gracefully
+* The project focuses on clean structure and readability
 
 Future Improvements
 
-Add data visualization (charts)
-Build a web interface (Streamlit or Flask)
-Implement async scraping for performance
-Add filtering and keyword search
-Store data in a database
+* Add data visualization (charts)
+* Build a web interface (Streamlit or Flask)
+* Implement async scraping for performance
+* Add filtering and keyword search
+* Store data in a database
 
 Author
 
