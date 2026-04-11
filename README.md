@@ -94,6 +94,12 @@ Future Improvements
 * Add filtering and keyword search
 * Store data in a database
 
+Example Output
+
+Below is a preview of the generated Excel report:
+
+![Excel Preview](assets/excel-preview.png)
+
 Author
 
 Developed as a practical project to demonstrate web scraping, data processing, and report generation skills.
