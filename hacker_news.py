@@ -1,6 +1,5 @@
 """
 Hacker News Scraper & Analyzer
-
 Description:
 Scrapes Hacker News posts and extracts:
 - title
@@ -9,18 +8,15 @@ Scrapes Hacker News posts and extracts:
 - time
 - score
 - comments
-
 Then:
 - sorts posts by comments
 - prints TOP 5
 - saves to a formatted Excel file
-
 Technologies:
 - requests
 - BeautifulSoup
 - openpyxl
 """
-
 from bs4 import BeautifulSoup
 import requests
 import time
@@ -40,13 +36,20 @@ pages = 10
 # =========================
 for page in range(1, pages + 1):
     time.sleep(1)
-
     url = f'https://news.ycombinator.com/news?p={page}'
-    response = requests.get(url, headers=headers)
+
+    # Send request with timeout; skip page on network error or bad status
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code != 200:
+            print(f'Page {page}: status {response.status_code}, skipping...')
+            continue
+    except requests.exceptions.RequestException as e:
+        print(f'Request error on page {page}: {e}')
+        continue
 
     soup = BeautifulSoup(response.text, 'html.parser')
     posts = soup.find_all('tr', class_='athing')
-
     print(f'Parsing page {page}, posts: {len(posts)}')
 
     for post in posts:
@@ -54,13 +57,11 @@ for page in range(1, pages + 1):
         title_tag = post.find("span", class_='titleline').find('a')
         title = title_tag.text
         link = title_tag.get('href')
-
         if link.startswith('item?id='):
             link = 'https://news.ycombinator.com/' + link
 
         # Meta
         subtext = post.find_next_sibling("tr")
-
         score_tag = subtext.find('span', class_='score')
         author_tag = subtext.find('a', class_='hnuser')
         time_tag = subtext.find('span', class_='age')
@@ -80,7 +81,6 @@ for page in range(1, pages + 1):
 
         # Convert to numbers
         score = int(score_text.split()[0]) if score_text != '0 points' else 0
-
         comment_count = 0
         if 'comment' in comment_text:
             comment_count = int(comment_text.split()[0])
@@ -140,17 +140,14 @@ for row in ws.iter_rows():
 for column in ws.columns:
     max_length = 0
     column_letter = column[0].column_letter
-
     for cell in column:
         try:
             if cell.value:
                 max_length = max(max_length, len(str(cell.value)))
         except:
             pass
-
     ws.column_dimensions[column_letter].width = max_length + 2
 
 # Save file
 wb.save('hacker_news.xlsx')
-
 print("\nExcel file saved: hacker_news.xlsx")
